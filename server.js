@@ -19,6 +19,12 @@ mongoose
   })
   .catch((err) => console.log(err));
 
+// routes
+server.use("/", require("./routes"));
+server.use("/posts", require("./routes/posts"));
+server.use("/users", require("./routes/users"));
+server.use("/auth", require("./routes/auth"));
+
 server.use(create404);
 
 server.use((err, req, res, next) => {
