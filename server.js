@@ -12,6 +12,8 @@ dotenv.config();
 const server = express();
 const PORT = process.env.APP_PORT || 8000;
 
+server.use(express.json());
+
 mongoose
   .connect(getDbURI(), {
     useNewUrlParser: true,
