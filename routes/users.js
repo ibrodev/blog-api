@@ -3,7 +3,7 @@ const User = require("../models/User");
 const users = express.Router();
 
 users.get("/", (req, res) => {
-  User.find({})
+  User.findAll()
     .then((users) => {
       if (!users) {
         return res.json({ message: "No users found!" });
