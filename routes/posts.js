@@ -15,4 +15,11 @@ posts.get("/", (req, res) => {
     });
 });
 
+// protected routs middleware
+posts.use(require("../middlewares/auth"));
+
+posts.post("/create", (req, res) => {
+  res.json({ message: "post create url" });
+});
+
 module.exports = posts;
