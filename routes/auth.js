@@ -4,7 +4,38 @@ const User = require("../models/User");
 
 const auth = express.Router();
 
-auth.post("/login", (req, res) => {});
+auth.post(
+  "/login",
+  check("email")
+    .not()
+    .isEmpty({ ignore_whitespace: true })
+    .withMessage("please provide an E-mail address")
+    .isEmail()
+    .withMessage("please provide a valid email address"),
+
+  check("password")
+    .not()
+    .isEmpty({ ignore_whitespace: true })
+    .withMessage("please provide a password")
+    .isLength({ min: 8, max: undefined })
+    .withMessage("password must be at least 8 characters"),
+  (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const { email, password } = req.body;
+
+    User.findByEmail(email).then((user) => {
+      if (!user || !user.isValidPassword(password)) {
+        return res.status(400).json({ error: "invalid credentials" });
+      }
+
+      res.json(user.authJSON());
+    });
+  }
+);
 
 auth.post(
   "/register",
@@ -70,7 +101,7 @@ auth.post(
     user
       .save()
       .then((user) => {
-        res.json(user);
+        res.json({ message: "User created successfully" });
       })
       .catch((err) => {
         res.json(err);
