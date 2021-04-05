@@ -26,15 +26,15 @@ UserSchema.methods.isValidPassword = function (plainPassword) {
 UserSchema.methods.generateJWT = function () {
   return jwt.sign(
     {
-      email: this.email,
+      id: this._id,
     },
-    "secrete-key"
+    process.env.JWT_SECRET_KEY
   );
 };
 
 UserSchema.methods.authJSON = function () {
   return {
-    email: this.email,
+    id: this._id,
     token: this.generateJWT(),
   };
 };

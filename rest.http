@@ -1,0 +1,29 @@
+###Login Route
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{
+    "email": "ibromoh.change@gmail.com",
+    "password": "test@123"
+}
+
+###Register Route
+POST http://localhost:8000/auth/register
+Content-Type: application/json
+
+{
+    "firstName": "Ibrahim",
+    "lastName": "Mohammed",
+    "email": "ibromoh.change@gmail.com",
+    "password": "test@123",
+    "passwordConfirmation": "test@123"
+}
+
+# POSTS ROUTES
+###Get all posts
+GET http://localhost:8000/posts
+
+###Create a post
+POST http://localhost:8000/posts/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNmIyOTljMTAzNTc4M2U0ODQwN2I1OCIsImlhdCI6MTYxNzY0MzY0MX0.87ZV8H_uY2ZgKYj4i1ykpf6diC2QzNfzElxhIckaDzs
