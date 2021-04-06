@@ -2,7 +2,6 @@ const express = require("express");
 const createError = require("http-errors");
 const { check, validationResult } = require("express-validator");
 const User = require("../models/User");
-const { NotExtended } = require("http-errors");
 
 const auth = express.Router();
 
