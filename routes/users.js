@@ -1,8 +1,10 @@
 const express = require("express");
+const createError = require("http-errors");
+
 const User = require("../models/User");
 const users = express.Router();
 
-users.get("/", (req, res) => {
+users.get("/", (req, res, next) => {
   User.findAll()
     .then((users) => {
       if (!users) {
@@ -11,7 +13,8 @@ users.get("/", (req, res) => {
       res.json({ users });
     })
     .catch((err) => {
-      res.json({ err });
+      console.log(err.message);
+      return next(createError.InternalServerError());
     });
 });
 

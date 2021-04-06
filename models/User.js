@@ -24,12 +24,15 @@ UserSchema.methods.isValidPassword = function (plainPassword) {
 };
 
 UserSchema.methods.generateJWT = function () {
-  return jwt.sign(
-    {
-      id: this._id,
-    },
-    process.env.JWT_SECRET_KEY
-  );
+  const payload = {
+    first_name: this.firstName,
+    last_name: this.lastName,
+  };
+  const secret_key = process.env.JWT_SECRET_KEY;
+  const options = {
+    expiresIn: "1hr",
+  };
+  return jwt.sign(payload, secret_key, options);
 };
 
 UserSchema.methods.authJSON = function () {

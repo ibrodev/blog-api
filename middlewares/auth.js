@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const createError = require("http-errors");
 
 const auth = (req, res, next) => {
   const authorization = req.headers["authorization"];
@@ -9,13 +10,19 @@ const auth = (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, data) => {
       if (err) {
-        res.sendStatus(403);
+        return next(
+          createError.Unauthorized({ message: "Invalid authorization token" })
+        );
       } else {
         next();
       }
     });
   } else {
-    res.status(403).json({ error: "Not Authorized" });
+    return next(
+      createError.Unauthorized({
+        message: "please provide an authorization header",
+      })
+    );
   }
 };
 

@@ -106,7 +106,8 @@ auth.post(
         res.json({ message: "User created successfully" });
       })
       .catch((err) => {
-        res.json(err);
+        console.log(err.message);
+        return next(createError.InternalServerError());
       });
   }
 );
