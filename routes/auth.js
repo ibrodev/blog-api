@@ -1,6 +1,8 @@
 const express = require("express");
+const createError = require("http-errors");
 const { check, validationResult } = require("express-validator");
 const User = require("../models/User");
+const { NotExtended } = require("http-errors");
 
 const auth = express.Router();
 
@@ -19,17 +21,17 @@ auth.post(
     .withMessage("please provide a password")
     .isLength({ min: 8, max: undefined })
     .withMessage("password must be at least 8 characters"),
-  (req, res) => {
+  (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return next(createError.BadRequest(errors.array()));
     }
     const { email, password } = req.body;
 
     User.findByEmail(email).then((user) => {
       if (!user || !user.isValidPassword(password)) {
-        return res.status(400).json({ error: "invalid credentials" });
+        return next(createError.BadRequest("Invalid Credentials"));
       }
 
       res.json(user.authJSON());
@@ -86,13 +88,13 @@ auth.post(
       return true;
     }),
 
-  (req, res) => {
+  (req, res, next) => {
     const { firstName, lastName, email, password } = req.body;
 
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return next(createError.BadRequest(errors.array()));
     }
 
     const user = new User({ firstName, lastName, email });

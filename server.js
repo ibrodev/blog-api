@@ -1,26 +1,12 @@
 // npm modules
 const express = require("express");
-const dotenv = require("dotenv");
-const mongoose = require("mongoose");
+const createError = require("http-errors");
+require("dotenv").config();
+require("./helpers/db");
 
-// custom modules
-const { handleError } = require("./helpers/error");
-const create404 = require("./middlewares/create404");
-const getDbURI = require("./helpers/db");
-
-dotenv.config();
 const server = express();
-const PORT = process.env.APP_PORT || 8000;
 
 server.use(express.json());
-
-mongoose
-  .connect(getDbURI(), {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  })
-  .catch((err) => console.log(err));
 
 // routes
 server.use("/", require("./routes"));
@@ -28,11 +14,23 @@ server.use("/posts", require("./routes/posts"));
 server.use("/users", require("./routes/users"));
 server.use("/auth", require("./routes/auth"));
 
-server.use(create404);
-
-server.use((err, req, res, next) => {
-  handleError(err, res);
+// catch 404
+server.use((req, res, next) => {
+  next(createError.NotFound());
 });
+
+// handle errors
+server.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.json({
+    error: {
+      status: err.status || 500,
+      message: err.message,
+    },
+  });
+});
+
+const PORT = process.env.APP_PORT || 8000;
 
 server.listen(
   PORT,

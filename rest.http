@@ -1,3 +1,7 @@
+### 404 error
+GET http://localhost:8000/route/neve/defined
+
+
 ###Login Route
 POST http://localhost:8000/auth/login
 Content-Type: application/json
