@@ -102,7 +102,7 @@ auth.post(
     user
       .save()
       .then((user) => {
-        res.json({ message: "User created successfully" });
+        res.status(201).json({ message: "User created successfully" });
       })
       .catch((err) => {
         console.log(err.message);

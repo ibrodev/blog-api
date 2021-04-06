@@ -18,7 +18,7 @@ Content-Type: application/json
 {
     "firstName": "Ibrahim",
     "lastName": "Mohammed",
-    "email": "ibromoh.change@gmail.com",
+    "email": "ibromoh@gmail.com",
     "password": "test@123",
     "passwordConfirmation": "test@123"
 }
@@ -31,3 +31,9 @@ GET http://localhost:8000/posts
 POST http://localhost:8000/posts/create
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNmIyOTljMTAzNTc4M2U0ODQwN2I1OCIsImlhdCI6MTYxNzY0MzY0MX0.87ZV8H_uY2ZgKYj4i1ykpf6diC2QzNfzElxhIckaDzs
+
+{
+    "title": "My First Post",
+    "body": "My first post body",
+    "author_id": "606b299c1035783e48407b58"
+}
