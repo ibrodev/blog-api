@@ -7,7 +7,7 @@ POST http://localhost:8000/auth/login
 Content-Type: application/json
 
 {
-    "email": "ibromoh.change@gmail.com",
+    "email": "ibromoh@gmail.com",
     "password": "test@123"
 }
 
@@ -27,13 +27,15 @@ Content-Type: application/json
 ###Get all posts
 GET http://localhost:8000/posts
 
+###Get post by ID
+GET http://localhost:8000/posts/606dc98d82dcab1a7c701c5
+
 ###Create a post
 POST http://localhost:8000/posts/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNmIyOTljMTAzNTc4M2U0ODQwN2I1OCIsImlhdCI6MTYxNzY0MzY0MX0.87ZV8H_uY2ZgKYj4i1ykpf6diC2QzNfzElxhIckaDzs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MDZkYjE4YmQ1Nzg5YjgxM2I1N2UwMGUiLCJpYXQiOjE2MTc4MDc3MzIsImV4cCI6MTYxNzgxMTMzMn0.rxBYXo0kU2I3exVk4iJzRT59wjkVwalNVhkkeiWxKEo
 
 {
     "title": "My First Post",
-    "body": "My first post body",
-    "author_id": "606b299c1035783e48407b58"
+    "body": "My first post body"
 }

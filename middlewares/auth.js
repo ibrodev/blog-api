@@ -14,6 +14,7 @@ const auth = (req, res, next) => {
           createError.Unauthorized({ message: "Invalid authorization token" })
         );
       } else {
+        req.userID = data.userID;
         next();
       }
     });

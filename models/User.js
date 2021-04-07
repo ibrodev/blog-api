@@ -25,8 +25,7 @@ UserSchema.methods.isValidPassword = function (plainPassword) {
 
 UserSchema.methods.generateJWT = function () {
   const payload = {
-    first_name: this.firstName,
-    last_name: this.lastName,
+    userID: this._id,
   };
   const secret_key = process.env.JWT_SECRET_KEY;
   const options = {
