@@ -46,6 +46,11 @@ UserSchema.statics.findByEmail = function (email) {
   return this.findOne({ email });
 };
 
+// virtual
+UserSchema.virtual("fullName").get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
+
 UserSchema.statics.findAll = function () {
   return this.find({}, "firstName lastName email createdAt updatedAt");
 };

@@ -18,7 +18,7 @@ Content-Type: application/json
 {
     "firstName": "Ibrahim",
     "lastName": "Mohammed",
-    "email": "ibromoh@gmail.com",
+    "email": "ibromoh.change@gmail.com",
     "password": "test@123",
     "passwordConfirmation": "test@123"
 }
@@ -28,7 +28,10 @@ Content-Type: application/json
 GET http://localhost:8000/posts
 
 ###Get post by ID
-GET http://localhost:8000/posts/606dc98d82dcab1a7c701c5
+GET http://localhost:8000/posts/606dc98d82dcab1a7c701c5f
+
+###Get post author by ID
+GET http://localhost:8000/posts/606dc98d82dcab1a7c701c5f/606db18bd5789b813b57e00a
 
 ###Create a post
 POST http://localhost:8000/posts/create
@@ -39,3 +42,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MDZkY
     "title": "My First Post",
     "body": "My first post body"
 }
+
+
+###Update post by ID
+PUT http://localhost:8000/posts/update/606dc98d82dcab1a7c701c5f
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MDZmMWFjOGZjNDIzMDU5M2NmZTI3NjYiLCJpYXQiOjE2MTc4OTQxMDAsImV4cCI6MTYxNzg5NzcwMH0.lpu9TzBRrpqC8cuQkbW_sKGAwE2pGYvTj23CswGnOw0
+
+
+
+###Delete post by id
+
+DELETE http://localhost:8000/posts/606dc98d82dcab1a7c701c5f
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MDZkYjE4YmQ1Nzg5YjgxM2I1N2UwMGUiLCJpYXQiOjE2MTc4OTQyODMsImV4cCI6MTYxNzg5Nzg4M30.pHdMCUojYQNeoVe4nKwvEulP5cZmN4po-Ekl57WTcX0

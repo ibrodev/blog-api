@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 const createError = require("http-errors");
+const Post = require("../models/Post");
 
-const auth = (req, res, next) => {
+const authentication = (req, res, next) => {
   const authorization = req.headers["authorization"];
 
   if (authorization) {
@@ -27,4 +28,6 @@ const auth = (req, res, next) => {
   }
 };
 
-module.exports = auth;
+module.exports = {
+  authentication,
+};
