@@ -29,7 +29,7 @@ UserSchema.methods.generateJWT = function () {
   };
   const secret_key = process.env.JWT_SECRET_KEY;
   const options = {
-    expiresIn: "1hr",
+    expiresIn: "6hr",
   };
   return jwt.sign(payload, secret_key, options);
 };
@@ -46,13 +46,19 @@ UserSchema.statics.findByEmail = function (email) {
   return this.findOne({ email });
 };
 
+UserSchema.statics.findAll = function () {
+  return this.find({}, "firstName lastName email createdAt updatedAt");
+};
+
+UserSchema.post("find", function (posts) {
+  posts.forEach((post) => {
+    post.set("password", null);
+  });
+});
+
 // virtual
 UserSchema.virtual("fullName").get(function () {
   return `${this.firstName} ${this.lastName}`;
 });
-
-UserSchema.statics.findAll = function () {
-  return this.find({}, "firstName lastName email createdAt updatedAt");
-};
 
 module.exports = mongoose.model("User", UserSchema);

@@ -11,7 +11,7 @@ const { authentication } = require("../middlewares/auth");
 
 posts.get("/", async (req, res, next) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().select().populate("author");
 
     if (posts.length === 0) return res.sendStatus(204);
 
@@ -29,7 +29,9 @@ posts.get("/:postId", async (req, res, next) => {
     return next(createError.BadRequest("Invalid post id"));
 
   try {
-    const post = await Post.findOne({ _id: postId });
+    const post = await Post.findOne({ _id: postId })
+      .select()
+      .populate("author");
 
     if (!post) {
       const error = new Error(`No post found with this ${postId} id`);
@@ -128,7 +130,7 @@ posts.delete("/:postId", async (req, res, next) => {
       return res.status(403).json("Not authorized");
 
     const deletedPost = await post.deleteOne();
-    res.json("Post deleted");
+    res.status(204);
   } catch (err) {
     console.log(err.message);
     return next(createError.InternalServerError());

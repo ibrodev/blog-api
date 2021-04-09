@@ -7,7 +7,7 @@ POST http://localhost:8000/auth/login
 Content-Type: application/json
 
 {
-    "email": "ibromoh@gmail.com",
+    "email": "ibromoh.change@gmail.com",
     "password": "test@123"
 }
 
@@ -18,7 +18,7 @@ Content-Type: application/json
 {
     "firstName": "Ibrahim",
     "lastName": "Mohammed",
-    "email": "ibromoh.change@gmail.com",
+    "email": "ibromoh@gmail.com",
     "password": "test@123",
     "passwordConfirmation": "test@123"
 }
@@ -28,19 +28,16 @@ Content-Type: application/json
 GET http://localhost:8000/posts
 
 ###Get post by ID
-GET http://localhost:8000/posts/606dc98d82dcab1a7c701c5f
-
-###Get post author by ID
-GET http://localhost:8000/posts/606dc98d82dcab1a7c701c5f/606db18bd5789b813b57e00a
+GET http://localhost:8000/posts/606f252a7f04326831638029
 
 ###Create a post
 POST http://localhost:8000/posts/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MDZkYjE4YmQ1Nzg5YjgxM2I1N2UwMGUiLCJpYXQiOjE2MTc4MDc3MzIsImV4cCI6MTYxNzgxMTMzMn0.rxBYXo0kU2I3exVk4iJzRT59wjkVwalNVhkkeiWxKEo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MDZmMjUwYTdmMDQzMjY4MzE2MzgwMjgiLCJpYXQiOjE2MTc4OTY3MzEsImV4cCI6MTYxNzkwMDMzMX0.iQLBFFrQzEzq7CGGOPAZNPx1b1RgoehcIo22nWzLSvk
 
 {
-    "title": "My First Post",
-    "body": "My first post body"
+    "title": "My second Post",
+    "body": "My second post body"
 }
 
 
@@ -56,3 +53,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MDZmM
 DELETE http://localhost:8000/posts/606dc98d82dcab1a7c701c5f
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MDZkYjE4YmQ1Nzg5YjgxM2I1N2UwMGUiLCJpYXQiOjE2MTc4OTQyODMsImV4cCI6MTYxNzg5Nzg4M30.pHdMCUojYQNeoVe4nKwvEulP5cZmN4po-Ekl57WTcX0
+
+
+// USER ROUTES
+
+###Get all users
+GET http://localhost:8000/users
+
+###Get user by Id
+GET http://localhost:8000/users/606f250a7f04326831638028
+
+
+
+// MEDIA ROUTES
+
+###Upload media
+
+POST http://localhost:8000/media
+Content-Type: multipart/form-data
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MDZmMjUwYTdmMDQzMjY4MzE2MzgwMjgiLCJpYXQiOjE2MTc5ODgxNjQsImV4cCI6MTYxNzk5MTc2NH0.sdu-_IRw-vQj_GAljCCW3eLIx0wl7QCldibzt86nlHc
